@@ -2,16 +2,23 @@ import throttle from 'lodash.throttle';
 
 const form = document.querySelector('.feedback-form');
 const infoInStorage = localStorage.getItem('feedback-form-state');
-const infoAboutForm = {};
+const valuesInStorage = JSON.parse(infoInStorage);
 
-const onLocalInfo = () => {
+const infoAboutForm = {
+  email: '',
+  message: '',
+};
+
+const onLocalInfo = (repairForm) => {
   if (infoInStorage) {
-    const valuesInStorage = JSON.parse(infoInStorage);
-    form.email.value = valuesInStorage.email;
-    form.message.value = valuesInStorage.message;
+    form.email.value = repairForm.email;
+    form.message.value = repairForm.message;
+    infoAboutForm.email = repairForm.email;
+    infoAboutForm.message = repairForm.message;
+
   }
 };
-onLocalInfo();
+onLocalInfo(valuesInStorage);
 
 const formChecker = evt => {
   evt.preventDefault();

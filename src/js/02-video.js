@@ -2,7 +2,7 @@ import Player from '@vimeo/player';
 import throttle from 'lodash.throttle';
 
 const iframe = document.querySelector('#vimeo-player');
-
+const cheackLocal = localStorage.getItem('videoplayer-current-time');
 const player = new Player('vimeo-player', {
   id: 192,
   width: 640,
@@ -17,4 +17,6 @@ player.on(
     );
   }, 1000)
 );
-player.setCurrentTime(localStorage.getItem('videoplayer-current-time'));
+if (cheackLocal) {
+  player.setCurrentTime(localStorage.getItem('videoplayer-current-time'));
+}
